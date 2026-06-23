@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,10 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- html2canvas library for high quality rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -18,7 +21,8 @@
             --bg-color: #08090d;
             --card-bg: rgba(15, 17, 26, 0.65);
             --card-border: rgba(255, 255, 255, 0.08);
-            --accent-default: #DAA520; /* Gold */
+            --accent-default: #DAA520;
+            /* Gold */
             --accent-color: #DAA520;
             --text-white: #FFFFFF;
             --text-gray: #a0a0b0;
@@ -67,7 +71,7 @@
         .blob-1 {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, #a855f7 0%, rgba(99,102,241,0) 70%);
+            background: radial-gradient(circle, #a855f7 0%, rgba(99, 102, 241, 0) 70%);
             top: -10%;
             left: -10%;
         }
@@ -75,7 +79,7 @@
         .blob-2 {
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, #f43f5e 0%, rgba(244,63,94,0) 70%);
+            background: radial-gradient(circle, #f43f5e 0%, rgba(244, 63, 94, 0) 70%);
             bottom: -10%;
             right: -10%;
             animation-delay: -7s;
@@ -84,16 +88,24 @@
         .blob-3 {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, #0ea5e9 0%, rgba(14,165,233,0) 70%);
+            background: radial-gradient(circle, #0ea5e9 0%, rgba(14, 165, 233, 0) 70%);
             top: 40%;
             left: 45%;
             animation-delay: -14s;
         }
 
         @keyframes pulse {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(60px, -40px) scale(1.1); }
-            100% { transform: translate(-30px, 30px) scale(0.95); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(60px, -40px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-30px, 30px) scale(0.95);
+            }
         }
 
         /* App Wrapper */
@@ -182,7 +194,9 @@
             text-transform: uppercase;
         }
 
-        textarea, input, select {
+        textarea,
+        input,
+        select {
             width: 100%;
             padding: 12px 14px;
             background-color: rgba(10, 11, 18, 0.7);
@@ -196,7 +210,9 @@
             transition: all 0.2s ease;
         }
 
-        textarea:focus, input:focus, select:focus {
+        textarea:focus,
+        input:focus,
+        select:focus {
             border-color: #c084fc;
             box-shadow: 0 0 0 2px rgba(192, 132, 252, 0.15);
             background-color: rgba(10, 11, 18, 0.9);
@@ -300,11 +316,11 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider-round {
+        input:checked+.slider-round {
             background-color: #a855f7;
         }
 
-        input:checked + .slider-round:before {
+        input:checked+.slider-round:before {
             transform: translateX(22px);
         }
 
@@ -381,7 +397,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
             transition: all 0.2s ease;
         }
 
@@ -395,12 +411,29 @@
         }
 
         /* Preset Background Styles */
-        .theme-midnight { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #30103b 100%); }
-        .theme-sunset { background: linear-gradient(135deg, #1e1b4b 0%, #450a0a 50%, #78350f 100%); }
-        .theme-forest { background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #0d9488 100%); }
-        .theme-cosmic { background: linear-gradient(135deg, #0f172a 0%, #2563eb 50%, #c084fc 100%); }
-        .theme-velvet { background: linear-gradient(135deg, #180828 0%, #0f051d 50%, #000000 100%); }
-        .theme-minimal { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+        .theme-midnight {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #30103b 100%);
+        }
+
+        .theme-sunset {
+            background: linear-gradient(135deg, #1e1b4b 0%, #450a0a 50%, #78350f 100%);
+        }
+
+        .theme-forest {
+            background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #0d9488 100%);
+        }
+
+        .theme-cosmic {
+            background: linear-gradient(135deg, #0f172a 0%, #2563eb 50%, #c084fc 100%);
+        }
+
+        .theme-velvet {
+            background: linear-gradient(135deg, #180828 0%, #0f051d 50%, #000000 100%);
+        }
+
+        .theme-minimal {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
 
         /* The Canvas Wrapper & Flyer */
         .canvas-area {
@@ -412,7 +445,7 @@
         }
 
         .preview-shadow-wrap {
-            box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
             border-radius: 16px;
             overflow: hidden;
             margin-bottom: 25px;
@@ -434,7 +467,7 @@
         .canvas-overlay-grid {
             position: absolute;
             inset: 0;
-            background-image: 
+            background-image:
                 radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0),
                 radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
             background-size: 40px 40px;
@@ -471,7 +504,7 @@
             position: relative;
             z-index: 2;
             transition: all 0.3s ease;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
         /* Visual Glass Grain simulated via noise overlay */
@@ -535,7 +568,8 @@
             color: var(--text-white);
             text-transform: uppercase;
             margin-bottom: 15px;
-            margin-left: 5px; /* offset letter spacing centering issue */
+            margin-left: 5px;
+            /* offset letter spacing centering issue */
         }
 
         .branding {
@@ -586,6 +620,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="bg-blobs">
@@ -604,7 +639,12 @@
             <!-- Left Panel: Controls -->
             <div class="glass-panel">
                 <div class="controls-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
                     Customization Panel
                 </div>
 
@@ -714,13 +754,14 @@ more Miracles</textarea>
                     <div id="quote-canvas" class="theme-midnight">
                         <div class="canvas-overlay-grid"></div>
                         <div class="canvas-glow"></div>
-                        
+
                         <div class="glass-card" id="quote-card">
                             <div class="glass-grain"></div>
                             <div class="quote-icon" id="quote-icon-element">“</div>
-                            
+
                             <div class="quote-text-container">
-                                <p class="quote-text" id="quote-display">A man that understands<br>Principles will get<br>more Miracles</p>
+                                <p class="quote-text" id="quote-display">A man that understands<br>Principles will
+                                    get<br>more Miracles</p>
                             </div>
 
                             <div class="footer-area">
@@ -733,7 +774,9 @@ more Miracles</textarea>
                 </div>
 
                 <button class="download-btn" id="download-btn">
-                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                    </svg>
                     Download Quote Card (PNG)
                 </button>
             </div>
@@ -798,7 +841,7 @@ more Miracles</textarea>
                 btn.classList.add('active');
                 currentAlignment = btn.getAttribute('data-align');
                 quoteDisplay.style.textAlign = currentAlignment;
-                
+
                 // Adjust container flex align for non-center text
                 const alignMap = { 'left': 'flex-start', 'center': 'center', 'right': 'flex-end' };
                 quoteDisplay.parentElement.style.justifyContent = alignMap[currentAlignment];
@@ -809,12 +852,12 @@ more Miracles</textarea>
         function updateCardStyles() {
             const opacityPct = sliderOpacity.value;
             valOpacity.textContent = `${opacityPct}%`;
-            
+
             // Adjust card background glass levels
             const glassOpacity = opacityPct / 100;
             // Mixed translucent dark and white background to give frosted feel
             quoteCard.style.backgroundColor = `rgba(15, 17, 26, ${0.4 + glassOpacity * 0.5})`;
-            
+
             // Card Border logic
             if (checkBorder.checked) {
                 quoteCard.style.border = `1px solid rgba(255, 255, 255, ${0.05 + (opacityPct / 200)})`;
@@ -835,14 +878,14 @@ more Miracles</textarea>
             dot.addEventListener('click', () => {
                 document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
                 dot.classList.add('active');
-                
+
                 const hexColor = dot.getAttribute('data-color');
                 currentAccentColor = hexColor;
                 document.documentElement.style.setProperty('--accent-color', hexColor);
-                
+
                 quoteIconElement.style.color = hexColor;
                 quoteDivider.style.backgroundColor = hexColor;
-                
+
                 // update local glowing blob inside canvas too
                 document.querySelector('.canvas-glow').style.background = hexColor;
             });
@@ -853,7 +896,7 @@ more Miracles</textarea>
             themeBtn.addEventListener('click', () => {
                 document.querySelectorAll('.theme-btn').forEach(tb => tb.classList.remove('active'));
                 themeBtn.classList.add('active');
-                
+
                 // Remove all existing themes
                 canvasContainer.className = '';
                 // Add the newly selected theme class
@@ -884,4 +927,5 @@ more Miracles</textarea>
         });
     </script>
 </body>
+
 </html>
