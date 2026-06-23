@@ -724,6 +724,424 @@
             stroke: currentColor;
             stroke-width: 2;
         }
+
+        /* ========================================== */
+        /* Template Selector Styles */
+        /* ========================================== */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .template-option {
+            background: rgba(10, 11, 18, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .template-option:hover {
+            border-color: #c084fc;
+            background: rgba(192, 132, 252, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .template-option.active {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 45px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tpl-preview-glass {
+            background: linear-gradient(135deg, #0f172a 0%, #c084fc 100%);
+            position: relative;
+        }
+        .tpl-preview-glass::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .tpl-preview-spotlight {
+            background: radial-gradient(circle at 75% 20%, #666 0%, #111 80%);
+        }
+
+        .tpl-preview-brush {
+            background: #fdece8;
+            position: relative;
+        }
+        .tpl-preview-brush::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 15px;
+            background: #000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            border-radius: 2px;
+        }
+
+        .tpl-preview-frame {
+            background: #f8f9fa;
+            position: relative;
+        }
+        .tpl-preview-frame::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px solid #789f8a;
+            border-radius: 2px;
+        }
+
+        .template-option span {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            white-space: nowrap;
+        }
+
+        .template-option.active span {
+            color: #d8b4fe;
+        }
+
+        /* ========================================== */
+        /* Template Custom Overrides */
+        /* ========================================== */
+        
+        /* 1. Cinematic Spotlight (3D Wall) */
+        #quote-canvas.template-spotlight {
+            background: radial-gradient(circle at 75% 20%, #4a4a4a 0%, #141414 75%) !important;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .template-spotlight .glass-card {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .template-spotlight .quote-text {
+            color: #0c0c0c !important;
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            text-shadow: 
+                1px 1px 0px #2a2a2a,
+                2px 2px 0px #222222,
+                3px 3px 0px #1a1a1a,
+                4px 4px 0px #111111,
+                5px 5px 0px #080808,
+                6px 6px 12px rgba(0, 0, 0, 0.8),
+                8px 12px 20px rgba(0, 0, 0, 0.95) !important;
+            letter-spacing: 2px !important;
+            line-height: 1.25 !important;
+            width: 100%;
+        }
+
+        .template-spotlight .quote-icon {
+            display: none !important;
+        }
+
+        .template-spotlight .divider {
+            display: none !important;
+        }
+
+        .template-spotlight .author {
+            color: #666 !important;
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: 0.65rem !important;
+            letter-spacing: 4px !important;
+            margin-top: 30px !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+        }
+
+        .template-spotlight .branding {
+            color: #444 !important;
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: 0.55rem !important;
+            letter-spacing: 3px !important;
+            margin-top: 5px !important;
+        }
+
+        .spotlight-lamp {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            width: 90px;
+            height: 90px;
+            z-index: 10;
+            opacity: 0.9;
+        }
+
+        .template-spotlight .spotlight-lamp {
+            display: block;
+        }
+
+        .spotlight-beam {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 75% 20%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 30%, rgba(0,0,0,0) 60%);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .template-spotlight .spotlight-beam {
+            display: block;
+        }
+
+        /* 2. Artistic Brush */
+        #quote-canvas.template-brush {
+            background: #fdece8 !important;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .template-brush .glass-card {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            padding: 0;
+            justify-content: center;
+        }
+
+        .brush-stroke-bg {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .template-brush .brush-stroke-bg {
+            display: block;
+        }
+
+        .template-brush .quote-text-container {
+            z-index: 2;
+            padding: 20px 40px;
+        }
+
+        .template-brush .quote-text {
+            color: #fdece8 !important;
+            font-family: 'Playfair Display', serif !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            letter-spacing: 0px !important;
+            line-height: 1.4 !important;
+            text-shadow: none !important;
+            text-transform: none !important;
+        }
+
+        .template-brush .quote-icon {
+            display: none !important;
+        }
+
+        .template-brush .divider {
+            display: none !important;
+        }
+
+        .template-brush .footer-area {
+            position: absolute;
+            bottom: 25px;
+            right: 35px;
+            align-items: flex-end;
+            width: auto;
+            z-index: 2;
+        }
+
+        .template-brush .author {
+            color: #1a1a1a !important;
+            font-family: 'Playfair Display', serif !important;
+            font-style: italic !important;
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+            letter-spacing: 0px !important;
+            text-transform: none !important;
+            margin-bottom: 2px !important;
+        }
+
+        .template-brush .branding {
+            color: #666 !important;
+            font-family: 'Playfair Display', serif !important;
+            font-size: 0.65rem !important;
+            letter-spacing: 0.5px !important;
+            text-transform: lowercase !important;
+            opacity: 0.7 !important;
+        }
+
+        /* 3. Sage Frame */
+        #quote-canvas.template-frame {
+            background: #f8f9fa !important;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .template-frame .glass-card {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            padding: 40px;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left !important;
+        }
+
+        .frame-border {
+            display: none;
+            position: absolute;
+            inset: 20px;
+            border-left: 2px solid #789f8a;
+            border-top: 2px solid #789f8a;
+            border-right: 2px solid transparent;
+            border-bottom: 2px solid transparent;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .template-frame .frame-border {
+            display: block;
+        }
+
+        .frame-quote {
+            display: none;
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-color: #789f8a;
+            color: #fff;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(120, 159, 138, 0.2);
+            line-height: 1.8;
+        }
+
+        .template-frame .frame-quote {
+            display: flex;
+        }
+
+        .frame-quote-top {
+            left: 50px;
+            top: 4px;
+        }
+
+        .frame-quote-bottom {
+            right: 50px;
+            bottom: 4px;
+        }
+
+        .template-frame .quote-text-container {
+            z-index: 2;
+            width: 100%;
+            justify-content: flex-start;
+            padding: 20px 10px;
+        }
+
+        .template-frame .quote-text {
+            color: #1c2e24 !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.2px !important;
+            line-height: 1.6 !important;
+            text-shadow: none !important;
+            text-transform: none !important;
+            text-align: left !important;
+        }
+
+        .template-frame .quote-icon {
+            display: none !important;
+        }
+
+        .template-frame .divider {
+            display: none !important;
+        }
+
+        .template-frame .glass-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 50px;
+        }
+
+        .template-frame .footer-area {
+            order: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 0px;
+        }
+
+        .template-frame .quote-text-container {
+            order: 2;
+        }
+
+        .template-frame .branding {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            color: #789f8a !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 0.65rem !important;
+            letter-spacing: 1px !important;
+            text-transform: lowercase !important;
+            opacity: 0.8 !important;
+        }
+
+        .template-frame .author {
+            display: block !important;
+            color: #789f8a !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+            letter-spacing: 1.5px !important;
+            text-transform: uppercase !important;
+            margin-top: 15px !important;
+            margin-bottom: 15px !important;
+            margin-left: 0 !important;
+            align-self: flex-start;
+        }
     </style>
 </head>
 
@@ -754,6 +1172,29 @@
                                 <circle cx="12" cy="12" r="3" />
                             </svg>
                             Customization Panel
+                        </div>
+
+                        <!-- Style Templates Grid -->
+                        <div class="control-group">
+                            <label>Choose Style Template</label>
+                            <div class="template-grid">
+                                <div class="template-option active" data-template="glass">
+                                    <div class="template-preview tpl-preview-glass"></div>
+                                    <span>Glassmorphic</span>
+                                </div>
+                                <div class="template-option" data-template="spotlight">
+                                    <div class="template-preview tpl-preview-spotlight"></div>
+                                    <span>3D Spotlight</span>
+                                </div>
+                                <div class="template-option" data-template="brush">
+                                    <div class="template-preview tpl-preview-brush"></div>
+                                    <span>Artistic Brush</span>
+                                </div>
+                                <div class="template-option" data-template="frame">
+                                    <div class="template-preview tpl-preview-frame"></div>
+                                    <span>Sage Frame</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="control-group">
@@ -866,12 +1307,48 @@ more Miracles</textarea>
             <!-- Right Panel: Canvas Preview & Download -->
             <div class="canvas-area">
                 <div class="preview-shadow-wrap">
-                    <div id="quote-canvas" class="theme-midnight">
+                    <div id="quote-canvas" class="theme-midnight template-glass">
                         <div class="canvas-overlay-grid"></div>
                         <div class="canvas-glow"></div>
 
+                        <!-- Spotlight Template Elements -->
+                        <div class="spotlight-beam"></div>
+                        <div class="spotlight-lamp">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50,45 C50,20 75,10 75,30" stroke="#1c1c1c" stroke-width="5" stroke-linecap="round" />
+                                <rect x="72" y="22" width="6" height="20" rx="2" fill="#111" />
+                                <path d="M42,45 L58,45 L54,55 L46,55 Z" fill="#1c1c1c" />
+                                <path d="M30,55 L70,55 L65,72 L35,72 Z" fill="#161616" />
+                                <ellipse cx="50" cy="72" rx="15" ry="4" fill="#ffffff" opacity="0.9" />
+                                <circle cx="50" cy="74" r="6" fill="#fff" filter="drop-shadow(0 0 8px #fffae0)" />
+                            </svg>
+                        </div>
+
                         <div class="glass-card" id="quote-card">
                             <div class="glass-grain"></div>
+                            
+                            <!-- Sage Frame Template Elements -->
+                            <div class="frame-border"></div>
+                            <div class="frame-quote frame-quote-top">“</div>
+                            <div class="frame-quote frame-quote-bottom">”</div>
+
+                            <!-- Artistic Brush Template SVG -->
+                            <div class="brush-stroke-bg">
+                                <svg viewBox="0 0 500 400" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 50,150 C 120,120 200,110 320,120 C 380,125 430,135 460,160 L 455,240 C 400,270 310,285 200,270 C 110,258 60,220 40,190 Z" fill="#0c0c0c" />
+                                    <path d="M 25,170 C 150,100 280,105 440,140" stroke="#0c0c0c" stroke-width="32" stroke-linecap="round" fill="none" />
+                                    <path d="M 45,210 C 170,140 310,135 465,185" stroke="#0c0c0c" stroke-width="40" stroke-linecap="round" fill="none" />
+                                    <path d="M 60,230 C 180,170 290,175 445,225" stroke="#0c0c0c" stroke-width="28" stroke-linecap="round" fill="none" />
+                                    <path d="M 15,160 C 110,95 240,90 380,115" stroke="#161616" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9" />
+                                    <path d="M 80,245 C 200,190 310,195 475,235" stroke="#0c0c0c" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9" />
+                                    <path d="M 30,140 C 100,115 190,110 270,120" stroke="#0c0c0c" stroke-width="15" stroke-linecap="round" fill="none" opacity="0.8" />
+                                    <circle cx="28" cy="180" r="4" fill="#0c0c0c" />
+                                    <circle cx="35" cy="145" r="2.5" fill="#0c0c0c" />
+                                    <circle cx="468" cy="155" r="3.5" fill="#0c0c0c" />
+                                    <circle cx="475" cy="205" r="3" fill="#0c0c0c" />
+                                </svg>
+                            </div>
+
                             <div class="quote-icon" id="quote-icon-element">“</div>
 
                             <div class="quote-text-container">
@@ -1012,10 +1489,145 @@ more Miracles</textarea>
                 document.querySelectorAll('.theme-btn').forEach(tb => tb.classList.remove('active'));
                 themeBtn.classList.add('active');
 
-                // Remove all existing themes
-                canvasContainer.className = '';
+                // Remove all background theme classes
+                canvasContainer.classList.remove('theme-midnight', 'theme-sunset', 'theme-forest', 'theme-cosmic', 'theme-velvet', 'theme-minimal');
                 // Add the newly selected theme class
                 canvasContainer.classList.add(themeBtn.getAttribute('data-theme'));
+            });
+        });
+
+        // 5.2 Template Styles Selector Logic
+        const templates = {
+            glass: {
+                text: "A man that understands\nPrinciples will get\nmore Miracles",
+                author: "Anteeny",
+                branding: "LIFE'SBEREAL",
+                font: "'Cinzel', serif",
+                align: "center",
+                fontsize: 23,
+                opacity: 8,
+                border: true,
+                icon: true,
+                color: "#DAA520"
+            },
+            spotlight: {
+                text: "GOD\nALWAYS\nHAS A PLAN.\nTRUST IT.\nLIVE IT.\nENJOY IT.",
+                author: "",
+                branding: "@THEBUSINESSGOAL.IN",
+                font: "'Montserrat', sans-serif",
+                align: "center",
+                fontsize: 24,
+                opacity: 0,
+                border: false,
+                icon: false,
+                color: "#1a1a1a"
+            },
+            brush: {
+                text: "Growth\nis quiet\nat first.",
+                author: "",
+                branding: "@reallygreatsite",
+                font: "'Playfair Display', serif",
+                align: "center",
+                fontsize: 36,
+                opacity: 0,
+                border: false,
+                icon: false,
+                color: "#fdece8"
+            },
+            frame: {
+                text: "People are 40% more emotional when they don't get enough sleep.",
+                author: "DID YOU KNOW?",
+                branding: "@reallygreatsite",
+                font: "'Plus Jakarta Sans', sans-serif",
+                align: "left",
+                fontsize: 22,
+                opacity: 0,
+                border: false,
+                icon: false,
+                color: "#789f8a"
+            }
+        };
+
+        let activeTemplate = 'glass';
+
+        function applyTemplate(name) {
+            activeTemplate = name;
+            const config = templates[name];
+
+            // Remove all template classes and add the active one
+            canvasContainer.classList.remove('template-glass', 'template-spotlight', 'template-brush', 'template-frame');
+            canvasContainer.classList.add(`template-${name}`);
+
+            // Update inputs values
+            inputText.value = config.text;
+            inputAuthor.value = config.author;
+            inputBranding.value = config.branding;
+
+            // Trigger preview elements content update
+            quoteDisplay.textContent = config.text;
+            authorDisplay.textContent = config.author;
+            brandingDisplay.textContent = config.branding;
+
+            // Apply font family
+            selectFont.value = config.font;
+            quoteDisplay.style.fontFamily = config.font;
+
+            // Apply font size
+            sliderFontsize.value = config.fontsize;
+            valFontsize.textContent = `${config.fontsize}px`;
+            quoteDisplay.style.fontSize = `${config.fontsize}px`;
+
+            // Apply opacity
+            sliderOpacity.value = config.opacity;
+            valOpacity.textContent = `${config.opacity}%`;
+
+            // Apply border & icon checkbox status
+            checkBorder.checked = config.border;
+            checkIcon.checked = config.icon;
+
+            // Apply active accent color
+            currentAccentColor = config.color;
+            document.documentElement.style.setProperty('--accent-color', config.color);
+            quoteIconElement.style.color = config.color;
+            quoteDivider.style.backgroundColor = config.color;
+            const canvasGlow = document.querySelector('.canvas-glow');
+            if (canvasGlow) canvasGlow.style.background = config.color;
+
+            // Apply text alignment
+            currentAlignment = config.align;
+            quoteDisplay.style.textAlign = config.align;
+            const alignMap = { 'left': 'flex-start', 'center': 'center', 'right': 'flex-end' };
+            if (quoteDisplay.parentElement) {
+                quoteDisplay.parentElement.style.justifyContent = alignMap[config.align];
+            }
+
+            // Sync active states on buttons/controls
+            document.querySelectorAll('.align-btn').forEach(btn => {
+                if (btn.getAttribute('data-align') === config.align) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            document.querySelectorAll('.color-dot').forEach(dot => {
+                if (dot.getAttribute('data-color') === config.color) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            updateCardStyles();
+        }
+
+        // Attach event listeners to template selectors
+        document.querySelectorAll('.template-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.template-option').forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+                const tplName = option.getAttribute('data-template');
+                applyTemplate(tplName);
             });
         });
 
