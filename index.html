@@ -139,15 +139,32 @@
         /* Main Dashboard Grid */
         .dashboard {
             display: grid;
-            grid-template-columns: 1.1fr 1fr;
+            grid-template-columns: 1.15fr 0.85fr;
             gap: 40px;
             align-items: start;
+            transition: grid-template-columns 0.5s cubic-bezier(0.4, 0, 0.2, 1), gap 0.5s ease;
+        }
+
+        .dashboard.panel-collapsed {
+            grid-template-columns: 0px 1fr;
+            gap: 20px;
         }
 
         @media (max-width: 968px) {
             .dashboard {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
+                gap: 20px;
             }
+            .dashboard.panel-collapsed {
+                gap: 20px;
+            }
+        }
+
+        /* Controls Wrapper for retractable logic */
+        .controls-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: visible;
         }
 
         /* Glassmorphic Panel Styles */
@@ -159,6 +176,95 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease, margin 0.5s ease, max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: left center;
+            overflow: hidden;
+            max-height: 1200px;
+        }
+
+        .glass-panel-content {
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+
+        .dashboard.panel-collapsed .glass-panel {
+            opacity: 0;
+            transform: scaleX(0);
+            padding: 30px 0;
+            border-color: transparent;
+            pointer-events: none;
+        }
+
+        .dashboard.panel-collapsed .glass-panel-content {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Toggle Button styled like a premium folder tab/badge */
+        .panel-toggle-btn {
+            position: absolute;
+            right: -20px;
+            top: 40px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+            z-index: 10;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .panel-toggle-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #b55fe6 0%, #8b5cf6 100%);
+            box-shadow: 0 12px 24px rgba(168, 85, 247, 0.5);
+        }
+
+        .panel-toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        .toggle-icon {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dashboard.panel-collapsed .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 968px) {
+            .glass-panel {
+                transform-origin: top center;
+                max-height: 1500px;
+            }
+            .dashboard.panel-collapsed .glass-panel {
+                transform: scaleY(0);
+                max-height: 0;
+                padding: 0 30px;
+                margin-bottom: -20px;
+            }
+            .panel-toggle-btn {
+                right: 20px;
+                top: auto;
+                bottom: -20px;
+                transform: rotate(90deg);
+            }
+            .panel-toggle-btn:hover {
+                transform: rotate(90deg) scale(1.1);
+            }
+            .dashboard.panel-collapsed .panel-toggle-btn {
+                bottom: -20px;
+                transform: rotate(270deg);
+            }
+            .dashboard.panel-collapsed .panel-toggle-btn:hover {
+                transform: rotate(270deg) scale(1.1);
+            }
         }
 
         /* Controls Panel Form Styles */
@@ -635,117 +741,126 @@
             <p>Design and download beautiful cinematic quotes with premium glassmorphic styling</p>
         </header>
 
-        <div class="dashboard">
-            <!-- Left Panel: Controls -->
-            <div class="glass-panel">
-                <div class="controls-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-                        <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    Customization Panel
-                </div>
+        <div class="dashboard" id="dashboard">
+            <!-- Left Panel: Controls Wrapper -->
+            <div class="controls-wrapper">
+                <div class="glass-panel" id="controls-panel">
+                    <div class="glass-panel-content">
+                        <div class="controls-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            Customization Panel
+                        </div>
 
-                <div class="control-group">
-                    <label for="input-text">Quote content</label>
-                    <textarea id="input-text">A man that understands
+                        <div class="control-group">
+                            <label for="input-text">Quote content</label>
+                            <textarea id="input-text">A man that understands
 Principles will get
 more Miracles</textarea>
-                </div>
+                        </div>
 
-                <div class="control-row">
-                    <div class="control-group">
-                        <label for="input-author">Author</label>
-                        <input type="text" id="input-author" value="Anteeny">
-                    </div>
-                    <div class="control-group">
-                        <label for="input-branding">Sub-branding / Tag</label>
-                        <input type="text" id="input-branding" value="LIFE'SBEREAL">
-                    </div>
-                </div>
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label for="input-author">Author</label>
+                                <input type="text" id="input-author" value="Anteeny">
+                            </div>
+                            <div class="control-group">
+                                <label for="input-branding">Sub-branding / Tag</label>
+                                <input type="text" id="input-branding" value="LIFE'SBEREAL">
+                            </div>
+                        </div>
 
-                <!-- Theme Preset Gradients -->
-                <div class="control-group">
-                    <label>Canvas Theme Background</label>
-                    <div class="theme-select-container">
-                        <div class="theme-btn theme-midnight active" data-theme="theme-midnight">Midnight</div>
-                        <div class="theme-btn theme-sunset" data-theme="theme-sunset">Sunset</div>
-                        <div class="theme-btn theme-forest" data-theme="theme-forest">Forest</div>
-                        <div class="theme-btn theme-cosmic" data-theme="theme-cosmic">Cosmic</div>
-                        <div class="theme-btn theme-velvet" data-theme="theme-velvet">Velvet</div>
-                        <div class="theme-btn theme-minimal" data-theme="theme-minimal">Minimal</div>
-                    </div>
-                </div>
+                        <!-- Theme Preset Gradients -->
+                        <div class="control-group">
+                            <label>Canvas Theme Background</label>
+                            <div class="theme-select-container">
+                                <div class="theme-btn theme-midnight active" data-theme="theme-midnight">Midnight</div>
+                                <div class="theme-btn theme-sunset" data-theme="theme-sunset">Sunset</div>
+                                <div class="theme-btn theme-forest" data-theme="theme-forest">Forest</div>
+                                <div class="theme-btn theme-cosmic" data-theme="theme-cosmic">Cosmic</div>
+                                <div class="theme-btn theme-velvet" data-theme="theme-velvet">Velvet</div>
+                                <div class="theme-btn theme-minimal" data-theme="theme-minimal">Minimal</div>
+                            </div>
+                        </div>
 
-                <div class="control-row">
-                    <div class="control-group">
-                        <label for="select-font">Font Family</label>
-                        <select id="select-font">
-                            <option value="'Cinzel', serif" selected>Cinzel (Classic Serif)</option>
-                            <option value="'Playfair Display', serif">Playfair (Elegant Serif)</option>
-                            <option value="'Montserrat', sans-serif">Montserrat (Modern Sans)</option>
-                            <option value="'Dancing Script', cursive">Dancing Script (Script)</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label>Text Alignment</label>
-                        <div class="align-buttons">
-                            <button class="align-btn" data-align="left">Left</button>
-                            <button class="align-btn active" data-align="center">Center</button>
-                            <button class="align-btn" data-align="right">Right</button>
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label for="select-font">Font Family</label>
+                                <select id="select-font">
+                                    <option value="'Cinzel', serif" selected>Cinzel (Classic Serif)</option>
+                                    <option value="'Playfair Display', serif">Playfair (Elegant Serif)</option>
+                                    <option value="'Montserrat', sans-serif">Montserrat (Modern Sans)</option>
+                                    <option value="'Dancing Script', cursive">Dancing Script (Script)</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Text Alignment</label>
+                                <div class="align-buttons">
+                                    <button class="align-btn" data-align="left">Left</button>
+                                    <button class="align-btn active" data-align="center">Center</button>
+                                    <button class="align-btn" data-align="right">Right</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label>Font Size</label>
+                                <div class="range-container">
+                                    <input type="range" id="slider-fontsize" min="16" max="46" value="23">
+                                    <span class="range-value" id="val-fontsize">23px</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label>Glass Transparency</label>
+                                <div class="range-container">
+                                    <input type="range" id="slider-opacity" min="0" max="80" value="8">
+                                    <span class="range-value" id="val-opacity">8%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Custom Accent Colors -->
+                        <div class="control-group">
+                            <label>Highlight Accent Color</label>
+                            <div class="color-grid">
+                                <div class="color-dot active" style="background-color: #DAA520;" data-color="#DAA520"></div>
+                                <div class="color-dot" style="background-color: #ec4899;" data-color="#ec4899"></div>
+                                <div class="color-dot" style="background-color: #06b6d4;" data-color="#06b6d4"></div>
+                                <div class="color-dot" style="background-color: #10b981;" data-color="#10b981"></div>
+                                <div class="color-dot" style="background-color: #f43f5e;" data-color="#f43f5e"></div>
+                                <div class="color-dot" style="background-color: #a855f7;" data-color="#a855f7"></div>
+                            </div>
+                        </div>
+
+                        <!-- Card Toggles -->
+                        <div class="control-row" style="margin-top: 10px;">
+                            <div class="switch-group" style="width: 100%;">
+                                <span class="switch-label">Show Card Border</span>
+                                <label class="switch-control">
+                                    <input type="checkbox" id="check-border" checked>
+                                    <span class="slider-round"></span>
+                                </label>
+                            </div>
+                            <div class="switch-group" style="width: 100%;">
+                                <span class="switch-label">Show Quote Icon</span>
+                                <label class="switch-control">
+                                    <input type="checkbox" id="check-icon" checked>
+                                    <span class="slider-round"></span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="control-row">
-                    <div class="control-group">
-                        <label>Font Size</label>
-                        <div class="range-container">
-                            <input type="range" id="slider-fontsize" min="16" max="46" value="23">
-                            <span class="range-value" id="val-fontsize">23px</span>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label>Glass Transparency</label>
-                        <div class="range-container">
-                            <input type="range" id="slider-opacity" min="0" max="80" value="8">
-                            <span class="range-value" id="val-opacity">8%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Custom Accent Colors -->
-                <div class="control-group">
-                    <label>Highlight Accent Color</label>
-                    <div class="color-grid">
-                        <div class="color-dot active" style="background-color: #DAA520;" data-color="#DAA520"></div>
-                        <div class="color-dot" style="background-color: #ec4899;" data-color="#ec4899"></div>
-                        <div class="color-dot" style="background-color: #06b6d4;" data-color="#06b6d4"></div>
-                        <div class="color-dot" style="background-color: #10b981;" data-color="#10b981"></div>
-                        <div class="color-dot" style="background-color: #f43f5e;" data-color="#f43f5e"></div>
-                        <div class="color-dot" style="background-color: #a855f7;" data-color="#a855f7"></div>
-                    </div>
-                </div>
-
-                <!-- Card Toggles -->
-                <div class="control-row" style="margin-top: 10px;">
-                    <div class="switch-group" style="width: 100%;">
-                        <span class="switch-label">Show Card Border</span>
-                        <label class="switch-control">
-                            <input type="checkbox" id="check-border" checked>
-                            <span class="slider-round"></span>
-                        </label>
-                    </div>
-                    <div class="switch-group" style="width: 100%;">
-                        <span class="switch-label">Show Quote Icon</span>
-                        <label class="switch-control">
-                            <input type="checkbox" id="check-icon" checked>
-                            <span class="slider-round"></span>
-                        </label>
-                    </div>
-                </div>
+                <button class="panel-toggle-btn" id="panel-toggle" aria-label="Toggle Customization Panel">
+                    <svg class="toggle-icon" id="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
             </div>
 
             <!-- Right Panel: Canvas Preview & Download -->
@@ -908,6 +1023,14 @@ more Miracles</textarea>
         quoteDisplay.style.fontSize = `${sliderFontsize.value}px`;
         quoteDisplay.style.fontFamily = selectFont.value;
         updateCardStyles();
+
+        // 5.5 Retractable Customization Panel
+        const panelToggleBtn = document.getElementById('panel-toggle');
+        const dashboardElement = document.getElementById('dashboard');
+
+        panelToggleBtn.addEventListener('click', () => {
+            dashboardElement.classList.toggle('panel-collapsed');
+        });
 
         // 6. html2canvas Download implementation
         downloadBtn.addEventListener('click', () => {
