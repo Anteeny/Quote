@@ -264,11 +264,14 @@
             /* Fix Canvas Scaling and Overflow Container */
             .canvas-area {
                 width: 100%;
-                overflow: hidden; /* Prevents layout break */
+                overflow: visible; /* Prevents cutting off the download button or canvas bottom */
                 display: flex;
-                justify-content: center;
-                align-items: flex-start;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
                 padding-top: 10px;
+                position: relative !important; /* Overrides the sticky positioning on mobile */
+                top: 0 !important;
             }
             
             .preview-shadow-wrap {
@@ -1905,8 +1908,9 @@
                 wrap.style.transform = `scale(${scale})`;
                 
                 // Adjust parent height so it doesn't leave huge whitespace below scaled canvas
+                // Add extra padding (120px) to account for the Download Button and bottom margins
                 const canvasHeight = canvasContainerObj.offsetHeight || 625;
-                canvasArea.style.height = `${canvasHeight * scale + 40}px`;
+                canvasArea.style.height = `${canvasHeight * scale + 120}px`;
             } else {
                 const wrap = document.querySelector('.preview-shadow-wrap');
                 const canvasArea = document.querySelector('.canvas-area');
