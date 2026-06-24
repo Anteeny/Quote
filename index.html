@@ -150,16 +150,6 @@
             gap: 20px;
         }
 
-        @media (max-width: 968px) {
-            .dashboard {
-                grid-template-columns: 1fr !important;
-                gap: 20px;
-            }
-            .dashboard.panel-collapsed {
-                gap: 20px;
-            }
-        }
-
         /* Controls Wrapper for retractable logic */
         .controls-wrapper {
             position: relative;
@@ -238,32 +228,52 @@
             transform: rotate(180deg);
         }
 
+        /* ==== Mobile UI Refactor ==== */
         @media (max-width: 968px) {
+            /* Layout Reversal (Canvas Top, Controls Bottom) */
+            .dashboard {
+                display: flex !important;
+                flex-direction: column-reverse;
+                gap: 30px;
+            }
+            .dashboard.panel-collapsed {
+                gap: 30px;
+            }
+            
+            /* Remove Lag & Glassmorphic filters for smooth mobile scrolling */
             .glass-panel {
-                transform-origin: top center;
-                max-height: 1500px;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(15, 17, 26, 0.95); /* Solid-like dark background */
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: none;
+                padding: 20px;
+                max-height: none;
+                transform: none !important;
+                opacity: 1 !important;
             }
-            .dashboard.panel-collapsed .glass-panel {
-                transform: scaleY(0);
-                max-height: 0;
-                padding: 0 30px;
-                margin-bottom: -20px;
+            .bg-blobs {
+                display: none !important; /* Hide massive blob filters */
             }
+
+            /* Hide Desktop Retractable Folder Logic entirely */
             .panel-toggle-btn {
-                right: 20px;
-                top: auto;
-                bottom: -20px;
-                transform: rotate(90deg);
+                display: none !important;
             }
-            .panel-toggle-btn:hover {
-                transform: rotate(90deg) scale(1.1);
+            
+            /* Fix Canvas Scaling and Overflow Container */
+            .canvas-area {
+                width: 100%;
+                overflow: hidden; /* Prevents layout break */
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding-top: 10px;
             }
-            .dashboard.panel-collapsed .panel-toggle-btn {
-                bottom: -20px;
-                transform: rotate(270deg);
-            }
-            .dashboard.panel-collapsed .panel-toggle-btn:hover {
-                transform: rotate(270deg) scale(1.1);
+            
+            .preview-shadow-wrap {
+                transform-origin: top center;
+                transition: transform 0.3s ease;
             }
         }
 
@@ -1878,6 +1888,43 @@
                 showToast("Design loaded!");
             }
         };
+
+        // --- Mobile Responsive Canvas Scaler ---
+        function scaleCanvasForMobile() {
+            if (window.innerWidth <= 968) {
+                const canvasArea = document.querySelector('.canvas-area');
+                const wrap = document.querySelector('.preview-shadow-wrap');
+                const canvasContainerObj = document.getElementById('quote-canvas');
+                
+                // Assuming canvas is approx 600px max width or 500px in some templates
+                const padding = 40; 
+                const availableWidth = window.innerWidth - padding;
+                const canvasWidth = canvasContainerObj.offsetWidth || 500;
+                
+                const scale = Math.min(1, availableWidth / canvasWidth);
+                wrap.style.transform = `scale(${scale})`;
+                
+                // Adjust parent height so it doesn't leave huge whitespace below scaled canvas
+                const canvasHeight = canvasContainerObj.offsetHeight || 625;
+                canvasArea.style.height = `${canvasHeight * scale + 40}px`;
+            } else {
+                const wrap = document.querySelector('.preview-shadow-wrap');
+                const canvasArea = document.querySelector('.canvas-area');
+                wrap.style.transform = 'none';
+                canvasArea.style.height = 'auto';
+            }
+        }
+
+        window.addEventListener('resize', scaleCanvasForMobile);
+        // Initial call
+        setTimeout(scaleCanvasForMobile, 100);
+        
+        // Ensure scale is correct when template changes (because width/height change)
+        templateBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setTimeout(scaleCanvasForMobile, 50);
+            });
+        });
     </script>
 </body>
 
